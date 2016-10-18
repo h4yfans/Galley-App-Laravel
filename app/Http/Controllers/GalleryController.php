@@ -26,6 +26,14 @@ class GalleryController extends Controller
     {
         $gallery = new Gallery();
 
+        // validate the Request through the validation rules
+        $this->validate($request, [
+           $gallery->gallery_name => 'required|min:3'
+        ]);
+
+
+
+
         // save a new Gallery
         $gallery->name = $request['gallery_name'];
         $gallery->created_by = 1;
