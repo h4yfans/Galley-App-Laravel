@@ -12,7 +12,11 @@
 
     @if(count($errors) > 0)
         @foreach($errors->all() as $error)
-            <li>{{$error}}</li>
+            <div class="alert alert-danger">
+                <ul>
+                    <li>{{$error}}</li>
+                </ul>
+            </div>
         @endforeach
 
     @endif
@@ -47,7 +51,7 @@
 
                 <div class="form-group">
                     <input type="text" name="gallery_name" id="gallery_name" placeholder="Name of the gallery"
-                           class="form-control">
+                           class="form-control" value="{{old('gallery_name')}}">
                 </div>
                 <button class="btn btn-primary">Save</button>
             </form>
