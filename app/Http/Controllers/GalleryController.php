@@ -28,11 +28,8 @@ class GalleryController extends Controller
 
         // validate the Request through the validation rules
         $this->validate($request, [
-           $gallery->gallery_name => 'required|min:3'
+           'gallery_name' => 'required|min:3'
         ]);
-
-
-
 
         // save a new Gallery
         $gallery->name = $request['gallery_name'];
