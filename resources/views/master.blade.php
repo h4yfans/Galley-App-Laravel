@@ -8,15 +8,16 @@
     <title>Gallery App | Laravel</title>
 
 
-
     <!-- Material Design fonts -->
     <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700">
     <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 
     <!-- Bootstrap -->
     <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="https://rawgit.com/FezVrasta/bootstrap-material-design/master/dist/css/bootstrap-material-design.css">
-    <link rel="stylesheet" type="text/css" href="https://rawgit.com/FezVrasta/bootstrap-material-design/master/dist/css/ripples.css">
+    <link rel="stylesheet" type="text/css"
+          href="https://rawgit.com/FezVrasta/bootstrap-material-design/master/dist/css/bootstrap-material-design.css">
+    <link rel="stylesheet" type="text/css"
+          href="https://rawgit.com/FezVrasta/bootstrap-material-design/master/dist/css/ripples.css">
 
 
     <script>
@@ -25,6 +26,14 @@
 </head>
 <body>
 <div class="container">
+    @if(Session::has('flash_message'))
+        <div class="alert alert-success">{{Session::get('flash_message')}}</div>
+    @endif
+
+    @if(Session::has('flash_error'))
+        <div class="alert alert-danger">{{Session::get('flash_error')}}</div>
+    @endif
+
     @yield('content')
 </div>
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>

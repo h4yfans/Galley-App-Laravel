@@ -12,25 +12,45 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('users.login');
 });
 
-Route::get('gallery/list', [
-    'uses' => 'GalleryController@getGalleryList',
-    'as' => 'get.gallery'
-]);
+Route::group(['prefix' => '/users'], function () {
 
-Route::post('gallery/save', [
-    'uses' => 'GalleryController@postGallery',
-    'as' => 'post.gallery'
-]);
+    Route::post('/signin', [
+        'uses' => 'UserController@postSignIn',
+        'as'   => 'user.signin'
+    ]);
 
-Route::get('gallery/view/{id}', [
-    'uses' => 'GalleryController@getGalleryPics',
-    'as' => 'get.galleryPics'
-]);
+    Route::post('/signup', [
+        'uses' => 'UserController@postSignUp',
+        'as'   => 'user.signup'
+    ]);
 
-Route::post('image/do-upload', [
+
+});
+
+//, 'middleware' => 'auth'
+
+Route::group(['prefix' => '/gallery'], function () {
+
+    Route::get('/list', [
+        'uses' => 'GalleryController@getGalleryList',
+        'as'   => 'get.gallery'
+    ]);
+
+    Route::post('/save', [
+        'uses' => 'GalleryController@postGallery',
+        'as'   => 'post.gallery'
+    ]);
+
+    Route::get('/view/{id}', [
+        'uses' => 'GalleryController@getGalleryPics',
+        'as'   => 'get.galleryPics'
+    ]);
+});
+
+Route::post('/image/do-upload', [
     'uses' => 'GalleryController@postImageUpload',
-    'as' => 'post.image'
+    'as'   => 'post.image'
 ]);
