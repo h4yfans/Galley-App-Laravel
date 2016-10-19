@@ -11,9 +11,10 @@
 |
 */
 
-Route::get('/', function () {
-    return view('users.login');
-});
+Route::get('/', [
+    'uses' => 'GalleryController@getIndex',
+    'as'   => 'index'
+]);
 
 Route::group(['prefix' => '/users'], function () {
 
@@ -24,19 +25,24 @@ Route::group(['prefix' => '/users'], function () {
 
     Route::get('/signup', [
         'uses' => 'UserController@getSignUp',
-        'as'   => 'user.signup'
+        'as'   => 'get.user.signup'
     ]);
 
     Route::post('/signup', [
         'uses' => 'UserController@postSignUp',
-        'as'   => 'user.signup'
+        'as'   => 'post.user.signup'
+    ]);
+
+    Route::get('/logout', [
+        'uses' => 'UserController@getLogout',
+        'as'   => 'get.user.logout'
     ]);
 
 });
 
-//, 'middleware' => 'auth'
+// '
 
-Route::group(['prefix' => '/gallery'], function () {
+Route::group(['prefix' => '/gallery', 'middleware' => 'auth'], function () {
 
     Route::get('/list', [
         'uses' => 'GalleryController@getGalleryList',

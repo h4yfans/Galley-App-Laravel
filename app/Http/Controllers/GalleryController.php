@@ -9,11 +9,20 @@
 namespace App\Http\Controllers;
 
 use App\Gallery;
+use Auth;
 use Illuminate\Http\Request;
 
 
 class GalleryController extends Controller
 {
+
+    public function getIndex(){
+        if (Auth::check()){
+            return redirect()->route('get.gallery');
+        }
+
+        return view('users.login');
+    }
 
     public function getGalleryList()
     {

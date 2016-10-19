@@ -1,5 +1,7 @@
 @extends('master')
 
+@include('includes.info')
+
 @section('content')
 
     <div class="jumbotron col-sm-6 col-sm-push-3" style="margin-top: 5em;">
@@ -17,7 +19,7 @@
 
             <div class="form-group">
                 <input type="submit" value="Login" name="login" id="login-btn" class="btn btn-primary">
-                <a href="{{route('user.signup')}}">sign up!</a>
+                <a href="{{route('get.user.signup')}}">sign up!</a>
             </div>
 
             <input type="hidden" name="_token" value="{{Session::token()}}">
