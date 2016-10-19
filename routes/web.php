@@ -22,11 +22,15 @@ Route::group(['prefix' => '/users'], function () {
         'as'   => 'user.signin'
     ]);
 
+    Route::get('/signup', [
+        'uses' => 'UserController@getSignUp',
+        'as'   => 'user.signup'
+    ]);
+
     Route::post('/signup', [
         'uses' => 'UserController@postSignUp',
         'as'   => 'user.signup'
     ]);
-
 
 });
 
