@@ -62,5 +62,5 @@ Route::group(['prefix' => '/gallery', 'middleware' => 'auth'], function () {
 
 Route::post('/image/do-upload', [
     'uses' => 'GalleryController@postImageUpload',
-    'as'   => 'post.image'
+    'as'   => 'post.doUpload'
 ]);

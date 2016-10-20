@@ -17,9 +17,9 @@ class GalleryController extends Controller
 {
 
 
-
-    public function getIndex(){
-        if (Auth::check()){
+    public function getIndex()
+    {
+        if (Auth::check()) {
             return redirect()->route('get.gallery');
         }
 
@@ -39,7 +39,7 @@ class GalleryController extends Controller
 
         // validate the Request through the validation rule
         $this->validate($request, [
-           'gallery_name' => 'required|min:3'
+            'gallery_name' => 'required|min:3'
         ]);
 
         // save a new Gallery
@@ -60,6 +60,24 @@ class GalleryController extends Controller
 
     public function postImageUpload(Request $request)
     {
+        // get the fie from post request
+        $file = $request->file['file'];
 
+        // set my file name
+        $filename = uniqid() . $file->getClientOriginalName();
+
+        // move the file to correct location
+        $file->move('gallery/images', $filename);
+
+        // save the image details into the database
+        $gallery = Gallery::find($request->input('gallery_id'));
+        $image = $gallery->images()->create([
+            'gallery_id' => $request->input('gallery_id'),
+            'file_name' => $filename,
+            'file_size' => $file->getClientSize(),
+            'file_mime' => $file->getClientMimeType(),
+            'file_path' => 'gallery/images' . $filename,
+            'crated_by' => Auth::user()->id
+        ]);
     }
 }
