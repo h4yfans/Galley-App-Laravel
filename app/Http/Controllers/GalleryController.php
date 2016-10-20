@@ -28,7 +28,7 @@ class GalleryController extends Controller
     {
         $galleries = Gallery::all();
 
-        return view('gallery.gallery')->with('galleries', $galleries);
+        return view('gallery.gallery')->with(['galleries' => $galleries]);
     }
 
     public function postGallery(Request $request)
@@ -42,7 +42,7 @@ class GalleryController extends Controller
 
         // save a new Gallery
         $gallery->name = $request['gallery_name'];
-        $gallery->created_by = 1;
+        $gallery->created_by = Auth::user()->id;
         $gallery->published = 1;
         $gallery->save();
 

@@ -1,5 +1,7 @@
 @extends('master')
 
+@include('includes.info')
+
 @section('content')
 
     @if(Auth::check())
