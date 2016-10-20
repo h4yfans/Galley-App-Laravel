@@ -1,14 +1,10 @@
 @extends('master')
-
+@include('includes.header')
 @include('includes.info')
 
 @section('content')
 
-    @if(Auth::check())
-        <ul>
-            <li><a href="{{route('get.user.logout')}}">Logout</a></li>
-        </ul>
-    @endif
+
 
 
     <div class="row">

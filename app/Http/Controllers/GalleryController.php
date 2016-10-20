@@ -16,6 +16,8 @@ use Illuminate\Http\Request;
 class GalleryController extends Controller
 {
 
+
+
     public function getIndex(){
         if (Auth::check()){
             return redirect()->route('get.gallery');
