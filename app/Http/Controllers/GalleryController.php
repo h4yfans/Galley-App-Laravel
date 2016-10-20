@@ -11,6 +11,7 @@ namespace App\Http\Controllers;
 use App\Gallery;
 use Auth;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 
 
 class GalleryController extends Controller
@@ -61,7 +62,7 @@ class GalleryController extends Controller
     public function postImageUpload(Request $request)
     {
         // get the fie from post request
-        $file = $request->file['file'];
+        $file = $request->file('file');
 
         // set my file name
         $filename = uniqid() . $file->getClientOriginalName();
@@ -71,13 +72,16 @@ class GalleryController extends Controller
 
         // save the image details into the database
         $gallery = Gallery::find($request->input('gallery_id'));
+
         $image = $gallery->images()->create([
             'gallery_id' => $request->input('gallery_id'),
-            'file_name' => $filename,
-            'file_size' => $file->getClientSize(),
-            'file_mime' => $file->getClientMimeType(),
-            'file_path' => 'gallery/images' . $filename,
-            'crated_by' => Auth::user()->id
+            'file_name'  => $filename,
+            'file_size'  => $file->getClientSize(),
+            'file_mime'  => $file->getClientMimeType(),
+            'file_path'  => 'gallery/images/' . $filename,
+            'created_by'  => Auth::user()->id
         ]);
+
+        return $image;
     }
 }

@@ -36,7 +36,11 @@
                     <tbody>
                     @foreach($galleries as $gallery)
                         <tr>
-                            <td>{{$gallery->name}}</td>
+                            <td>{{$gallery->name}}
+                                <span class="pull-right">
+                                    {{$gallery->images()->count()}}
+                                </span>
+                            </td>
                             <td><a href="{{route('get.galleryPics', ['id' => $gallery->id]) }}">View</a></td>
                         </tr>
                     @endforeach
