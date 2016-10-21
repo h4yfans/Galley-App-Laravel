@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+require 'vendor/autoload.php';
 
 use App\User;
 use Auth;

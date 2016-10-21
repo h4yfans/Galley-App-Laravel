@@ -19,7 +19,7 @@ var handleDropzoneFileUpload = {
     },
     handleSuccess: function (response) {
         var imageList = $('#gallery-images ul');
-        var imageSrc = baseUrl + '/' + response.file_path;
+        var imageSrc = baseUrl + '/gallery/images/thumbs/' + response.file_name;
         $(imageList).append('<li><a href="' + imageSrc + '"><img src="' + imageSrc + '"></a> </li>');
     }
 }

@@ -10,16 +10,16 @@
         }
 
         #gallery-images ul {
-            margin:0;
-            padding:0;
+            margin: 0;
+            padding: 0;
         }
 
-        #gallery-images li{
-            margin:0;
-            padding:0;
+        #gallery-images li {
+            margin: 0;
+            padding: 0;
             list-style: none;
             float: left;
-            padding-right:10px;
+            padding-right: 10px;
         }
     </style>
     <div class="row">
@@ -35,7 +35,7 @@
                     @foreach($gallery->images as $image)
                         <li>
                             <a href="{{url($image->file_path)}}" data-lightbox="image-1">
-                                <img src="{{url($image->file_path)}}">
+                                <img src="{{ url('/gallery/images/thumbs/' .  $image->file_name) }}">
                             </a>
                         </li>
                     @endforeach
@@ -51,6 +51,7 @@
             </form>
         </div>
     </div>
+
 
     <div class="row">
         <div class="col-md-12">

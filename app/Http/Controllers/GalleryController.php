@@ -12,6 +12,7 @@ use App\Gallery;
 use Auth;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Intervention\Image\Facades\Image;
 
 
 class GalleryController extends Controller
@@ -68,7 +69,18 @@ class GalleryController extends Controller
         $filename = uniqid() . $file->getClientOriginalName();
 
         // move the file to correct location
+        if (!file_exists('gallery/images')){
+            mkdir('gallery/images', 0777, true);
+        }
+
         $file->move('gallery/images', $filename);
+
+        if (!file_exists('gallery/images/thumbs')){
+            mkdir('gallery/images/thumbs', 0777, true);
+        }
+
+
+        $thumb = Image::make('gallery/images/' . $filename)->resize(240,160)->save('gallery/images/thumbs/' . $filename, 60);
 
         // save the image details into the database
         $gallery = Gallery::find($request->input('gallery_id'));
@@ -98,9 +110,10 @@ class GalleryController extends Controller
         // get the images
         $images = $currentGallery->images();
 
-        // delete the iamges
+        // delete the images
         foreach ($currentGallery->images as $image){
             unlink(public_path($image->file_path));
+            unlink(public_path('gallery/images/thumbs/' . $image->file_name));
         }
 
         // delete the DB records
