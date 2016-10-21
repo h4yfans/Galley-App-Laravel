@@ -35,6 +35,7 @@ class GalleryController extends Controller
         return view('gallery.gallery')->with(['galleries' => $galleries]);
     }
 
+
     public function postGallery(Request $request)
     {
         $gallery = new Gallery();
