@@ -36,12 +36,19 @@
                     <tbody>
                     @foreach($galleries as $gallery)
                         <tr>
-                            <td>{{$gallery->name}}
-                                <span class="pull-right">
+                            @if(Auth::user()->id == $gallery->created_by)
+                                <td>{{$gallery->name}}
+                                    <span class="pull-right">
                                     {{$gallery->images()->count()}}
                                 </span>
-                            </td>
-                            <td><a href="{{route('get.galleryPics', ['id' => $gallery->id]) }}">View</a></td>
+                                </td>
+                                <td>
+                                    <a href="{{route('get.galleryPics', ['id' => $gallery->id]) }}">View</a> /
+                                    <a href="{{route('delete.gallery', ['id' => $gallery->id]) }}">Delete</a>
+                                </td>
+                            @endif
+
+
                         </tr>
                     @endforeach
                     </tbody>

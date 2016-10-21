@@ -58,6 +58,11 @@ Route::group(['prefix' => '/gallery', 'middleware' => 'auth'], function () {
         'uses' => 'GalleryController@getGalleryPics',
         'as'   => 'get.galleryPics'
     ]);
+
+    Route::get('/delete/{id}', [
+        'uses' => 'GalleryController@postDeleteGallery',
+        'as'   => 'delete.gallery'
+    ]);
 });
 
 Route::post('/image/do-upload', [

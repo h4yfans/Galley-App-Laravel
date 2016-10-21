@@ -79,9 +79,35 @@ class GalleryController extends Controller
             'file_size'  => $file->getClientSize(),
             'file_mime'  => $file->getClientMimeType(),
             'file_path'  => 'gallery/images/' . $filename,
-            'created_by'  => Auth::user()->id
+            'created_by' => Auth::user()->id
         ]);
 
         return $image;
+    }
+
+    public function postDeleteGallery($id)
+    {
+        // load the gallery
+        $currentGallery = Gallery::find($id);
+
+        //check ownership
+        if ($currentGallery->created_by != Auth::user()->id){
+            abort('403', 'You are not allowed to delete this gallery');
+        }
+
+        // get the images
+        $images = $currentGallery->images();
+
+        // delete the iamges
+        foreach ($currentGallery->images as $image){
+            unlink(public_path($image->file_path));
+        }
+
+        // delete the DB records
+        $images->delete();
+
+        $currentGallery->delete();
+
+        return redirect()->back();
     }
 }

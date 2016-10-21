@@ -20,6 +20,7 @@
           href="https://rawgit.com/FezVrasta/bootstrap-material-design/master/dist/css/bootstrap-material-design.css">
     <link rel="stylesheet" type="text/css"
           href="https://rawgit.com/FezVrasta/bootstrap-material-design/master/dist/css/ripples.css">
+    <link rel="stylesheet" href="{{URL::to('css/lightbox.css')}}">
     <script>
         var baseUrl = "{{url('/')}}";
     </script>
@@ -37,6 +38,7 @@
     @yield('content')
 </div>
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="{{URL::to('js/lightbox.min.js')}}"></script>
 <script src="{{URL::to('js/styles.js')}}"></script>
 <script src="{{URL::to('js/ripples.min.js')}}"></script>
 <script src="{{URL::to('js/material.min.js')}}"></script>

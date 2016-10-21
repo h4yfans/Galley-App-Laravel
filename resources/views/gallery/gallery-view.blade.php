@@ -34,8 +34,8 @@
                 <ul>
                     @foreach($gallery->images as $image)
                         <li>
-                            <a href="{{url($image->file_path)}}" target="_blank">
-                                <img src="{{url($image->file_path)}}" alt="">
+                            <a href="{{url($image->file_path)}}" data-lightbox="image-1">
+                                <img src="{{url($image->file_path)}}">
                             </a>
                         </li>
                     @endforeach
